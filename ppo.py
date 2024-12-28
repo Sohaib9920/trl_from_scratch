@@ -146,7 +146,7 @@ class PPOTrainer:
 
     def train_policy(self, query, response, logprobs, values, advantages, returns):
         bs = self.ppo_params['batch_size']
-        fbs = self.ppo_params['forward_batch_size']
+        sbs = self.ppo_params['step_batch_size']
         b_inds = list(range(bs))
         model_input = torch.cat([query, response], dim=1)
         all_stats = []
@@ -154,8 +154,8 @@ class PPOTrainer:
         for _ in range(self.ppo_params['ppo_epochs']):
             np.random.shuffle(b_inds)
 
-            for start in range(0, bs, fbs):
-                end = start + fbs
+            for start in range(0, bs, sbs):
+                end = start + sbs
                 mb_inds = b_inds[start:end]
                 mb_query = query[mb_inds]
                 mb_response = response[mb_inds]
