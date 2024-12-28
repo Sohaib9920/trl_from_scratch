@@ -8,6 +8,7 @@ from datasets import load_dataset
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from gpt2 import GPT2HeadWithValueModel, respond_to_batch
 from ppo import PPOTrainer
+import os
 
 config = {
     "lm_name": "lvwerra/gpt2-imdb",
@@ -31,6 +32,7 @@ config = {
     "vf_coef":.1, 
 }
 
+wandb.login(key=os.environ["WANDB_API_KEY"])
 wandb.init(project='gpt2-sentiment', config=config)
 
 ds = load_dataset('imdb', split='train')
