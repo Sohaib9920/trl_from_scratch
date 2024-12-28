@@ -31,6 +31,8 @@ config = {
     "vf_coef":.1, 
 }
 
+wandb.init(project='gpt2-sentiment', config=config)
+
 ds = load_dataset('imdb', split='train')
 ds = ds.rename_columns({'text': 'review', 'label': 'sentiment'})
 df = ds.to_pandas()
@@ -45,6 +47,8 @@ sentiment_tokenizer = AutoTokenizer.from_pretrained(config["cls_model_name"])
 gpt2_model = GPT2HeadWithValueModel.from_pretrained(config['lm_name'])
 gpt2_model_ref = GPT2HeadWithValueModel.from_pretrained(config['ref_lm_name'])
 gpt2_tokenizer = AutoTokenizer.from_pretrained(config['tk_name'])
+
+wandb.watch(gpt2_model, log='all')
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 gpt2_model.to(device)
