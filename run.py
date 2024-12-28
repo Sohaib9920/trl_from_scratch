@@ -12,7 +12,7 @@ from ppo import PPOTrainer
 config = {
     "lm_name": "lvwerra/gpt2-imdb",
     "ref_lm_name": "lvwerra/gpt2-imdb",
-    "cls_model_name": "Sohaib9920/distilbert-imdb",
+    "cls_model_name": "lvwerra/distilbert-imdb",
     "tk_name": "gpt2",
     "steps": 25600,
     "batch_size": 256,
