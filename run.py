@@ -9,6 +9,7 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from gpt2 import GPT2HeadWithValueModel, respond_to_batch
 from ppo import PPOTrainer
 import random
+import os
 
 config = {
     "lm_name": "lvwerra/gpt2-imdb",
