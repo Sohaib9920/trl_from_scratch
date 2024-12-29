@@ -8,7 +8,7 @@ from datasets import load_dataset
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from gpt2 import GPT2HeadWithValueModel, respond_to_batch
 from ppo import PPOTrainer
-import os
+import random
 
 config = {
     "lm_name": "lvwerra/gpt2-imdb",
@@ -32,6 +32,9 @@ config = {
     "cliprange_value":.2,
     "vf_coef":.1, 
 }
+torch.manual_seed(42)
+np.random.seed(42)
+random.seed(42)
 
 wandb.login(key=os.environ["WANDB_API_KEY"])
 wandb.init(project='gpt2-sentiment', config=config)

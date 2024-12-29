@@ -211,9 +211,10 @@ class PPOTrainer:
     def compute_adv_returns(self, rewards, values):
         lastgaelam = 0.0
         advantages_reversed = []
+        gen_len = rewards.shape[1]
 
-        for t in reversed(range(rewards.shape[1])):
-            nextvalues = rewards[:, t + 1] if t < rewards.shape[1] - 1 else 0.0
+        for t in reversed(range(gen_len)):
+            nextvalues = values[:, t + 1] if t < gen_len - 1 else 0.0
             delta = rewards[:, t] + self.ppo_params["gamma"] * nextvalues - values[:, t]
             lastgaelam = delta + self.ppo_params['gamma'] * self.ppo_params['lam'] * lastgaelam
             advantages_reversed.append(lastgaelam)
