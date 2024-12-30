@@ -20,7 +20,7 @@ config = {
     "batch_size": 512,
     "forward_batch_size": 32,
     "step_batch_size": 32,
-    "ppo_epochs": 4,   
+    "ppo_epochs": 2,   
     "txt_in_len": 5,
     "txt_out_len": 15,
     "lr": 1.41e-5,
