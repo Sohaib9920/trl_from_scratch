@@ -32,7 +32,7 @@ config = {
     "cliprange": .2,
     "cliprange_value":.2,
     "vf_coef":.1, 
-    "torch_dtype": "bfloat16",
+    "torch_dtype": None,
     "device_map": None
 }
 torch.manual_seed(42)
