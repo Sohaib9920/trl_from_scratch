@@ -13,5 +13,5 @@ class ValueModel(nn.Module):
     
     def forward(self, *args, **kwargs):
         out = self.transformer(*args, **kwargs)
-        value = self.v_head(out.hidden_states).squeeze(-1)
+        value = self.v_head(out.hidden_states[-1]).squeeze(-1)
         return out.logits, out.past_key_values, value
