@@ -19,7 +19,7 @@ config = {
     "steps": 25600,
     "batch_size": 256,
     "forward_batch_size": 16,
-    "step_batch_size": 16,
+    "step_batch_size": 32,
     "ppo_epochs": 4,   
     "txt_in_len": 5,
     "txt_out_len": 15,
