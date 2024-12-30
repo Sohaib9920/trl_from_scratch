@@ -36,7 +36,7 @@ def stats_to_np(stats_dict):
     new_dict = dict()
     for k, v in stats_dict.items():
         if isinstance(v, torch.Tensor):
-            new_dict[k] = v.detach().cpu().numpy()
+            new_dict[k] = v.detach().cpu().float().numpy()
         else:
             new_dict[k] = v
         if np.isscalar(new_dict[k]):
