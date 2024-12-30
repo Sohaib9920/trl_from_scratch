@@ -10,7 +10,7 @@ class ValueModel(nn.Module):
                                                                 device_map=config["device_map"])
         self.v_head = nn.Linear(self.transformer.config.hidden_size, 1)
     
-    def forward(self, **kwargs):
-        out = self.transformer(**kwargs)
+    def forward(self, *args, **kwargs):
+        out = self.transformer(*args, **kwargs)
         value = self.v_head(out.hidden_states).squeeze(-1)
         return out.logits, out.past_key_values, value

@@ -61,7 +61,7 @@ def respond_to_batch(model, queries, txt_len=20):
     responses = []
     for i in range(txt_len):
         # Get Logits
-        outputs = model(input_ids, past_key_values=past)
+        outputs = model(input_ids=input_ids, past_key_values=past)
         next_token_logits = outputs[0][:, -1, :]
         past = outputs[1]
         # Sample
