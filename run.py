@@ -39,8 +39,8 @@ torch.manual_seed(42)
 np.random.seed(42)
 random.seed(42)
 
-# wandb.login(key=os.environ["WANDB_API_KEY"])
-# wandb.init(project='gpt2-sentiment', config=config)
+wandb.login(key=os.environ["WANDB_API_KEY"])
+wandb.init(project='gpt2-sentiment', config=config)
 
 ds = load_dataset('imdb', split='train')
 ds = ds.rename_columns({'text': 'review', 'label': 'sentiment'})
