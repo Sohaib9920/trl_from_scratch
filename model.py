@@ -7,7 +7,8 @@ class ValueModel(nn.Module):
         super().__init__()
         self.transformer = AutoModelForCausalLM.from_pretrained(config['lm_name'], 
                                                                 torch_dtype=getattr(torch, config["torch_dtype"]),
-                                                                device_map=config["device_map"])
+                                                                device_map=config["device_map"],
+                                                                output_hidden_states=True)
         self.v_head = nn.Linear(self.transformer.config.hidden_size, 1)
     
     def forward(self, *args, **kwargs):
