@@ -13,13 +13,13 @@ import random
 import os
 
 config = {
-    "lm_name": "lvwerra/gpt2-imdb",
+    "lm_name": "Qwen/Qwen2.5-0.5B",
     "cls_model_name": "lvwerra/distilbert-imdb",
     "tk_name": "gpt2",
     "steps": 25600,
     "batch_size": 512,
     "forward_batch_size": 32,
-    "step_batch_size": 32,
+    "step_batch_size": 16,
     "ppo_epochs": 2,   
     "txt_in_len": 5,
     "txt_out_len": 15,
