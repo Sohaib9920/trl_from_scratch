@@ -23,7 +23,7 @@ config = {
     "ppo_epochs": 2,   
     "txt_in_len": 5,
     "txt_out_len": 15,
-    "lr": 1.41e-5,
+    "lr": 1.41e-4,
     "init_kl_coef":0.2,
     "target": 6,
     "horizon":10000,
