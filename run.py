@@ -12,8 +12,8 @@ import random
 import os
 
 config = {
-    "lm_name": "lvwerra/gpt2-imdb",
-    "ref_lm_name": "lvwerra/gpt2-imdb",
+    "lm_name": "Qwen/Qwen2.5-1.5B",
+    "ref_lm_name": "Qwen/Qwen2.5-1.5B",
     "cls_model_name": "lvwerra/distilbert-imdb",
     "tk_name": "gpt2",
     "steps": 25600,
@@ -23,7 +23,7 @@ config = {
     "ppo_epochs": 2,   
     "txt_in_len": 5,
     "txt_out_len": 15,
-    "lr": 1.41e-4,
+    "lr": 1.41e-5,
     "init_kl_coef":0.2,
     "target": 6,
     "horizon":10000,
@@ -51,8 +51,8 @@ df['review'] = df['review'].apply(lambda x: x[:1000])
 sentiment_model = AutoModelForSequenceClassification.from_pretrained(config["cls_model_name"])
 sentiment_tokenizer = AutoTokenizer.from_pretrained(config["cls_model_name"])
 
-gpt2_model = GPT2HeadWithValueModel.from_pretrained(config['lm_name'])
-gpt2_model_ref = GPT2HeadWithValueModel.from_pretrained(config['ref_lm_name'])
+gpt2_model = GPT2HeadWithValueModel.from_pretrained(config['lm_name'], torch_dtype=torch.bfloat16)
+gpt2_model_ref = GPT2HeadWithValueModel.from_pretrained(config['ref_lm_name'], torch_dtype=torch.bfloat16)
 gpt2_tokenizer = AutoTokenizer.from_pretrained(config['tk_name'])
 
 wandb.watch(gpt2_model, log='all')
