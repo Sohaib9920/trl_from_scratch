@@ -13,7 +13,7 @@ import random
 import os
 
 config = {
-    "lm_name": "Qwen/Qwen2.5-0.5B",
+    "lm_name": "lvwerra/gpt2-imdb",
     "cls_model_name": "lvwerra/distilbert-imdb",
     "tk_name": "gpt2",
     "steps": 25600,
