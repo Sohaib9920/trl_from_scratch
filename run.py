@@ -12,8 +12,8 @@ import random
 import os
 
 config = {
-    "lm_name": "Qwen/Qwen2.5-1.5B",
-    "ref_lm_name": "Qwen/Qwen2.5-1.5B",
+    "lm_name": "Qwen/Qwen2.5-0.5B",
+    "ref_lm_name": "Qwen/Qwen2.5-0.5B",
     "cls_model_name": "lvwerra/distilbert-imdb",
     "tk_name": "gpt2",
     "steps": 25600,
@@ -55,7 +55,7 @@ gpt2_model = GPT2HeadWithValueModel.from_pretrained(config['lm_name'], torch_dty
 gpt2_model_ref = GPT2HeadWithValueModel.from_pretrained(config['ref_lm_name'], torch_dtype=torch.bfloat16)
 gpt2_tokenizer = AutoTokenizer.from_pretrained(config['tk_name'])
 
-wandb.watch(gpt2_model, log='all')
+# wandb.watch(gpt2_model, log='all')
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 gpt2_model.to(device)
