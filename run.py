@@ -7,13 +7,13 @@ tqdm.pandas()
 from datasets import load_dataset
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from gpt2 import GPT2HeadWithValueModel, respond_to_batch
+from model import ValueModel
 from ppo import PPOTrainer
 import random
 import os
 
 config = {
     "lm_name": "Qwen/Qwen2.5-0.5B",
-    "ref_lm_name": "Qwen/Qwen2.5-0.5B",
     "cls_model_name": "lvwerra/distilbert-imdb",
     "tk_name": "gpt2",
     "steps": 25600,
@@ -32,13 +32,15 @@ config = {
     "cliprange": .2,
     "cliprange_value":.2,
     "vf_coef":.1, 
+    "torch_dtype": "bfloat16",
+    "device_map": None
 }
 torch.manual_seed(42)
 np.random.seed(42)
 random.seed(42)
 
-wandb.login(key=os.environ["WANDB_API_KEY"])
-wandb.init(project='gpt2-sentiment', config=config)
+# wandb.login(key=os.environ["WANDB_API_KEY"])
+# wandb.init(project='gpt2-sentiment', config=config)
 
 ds = load_dataset('imdb', split='train')
 ds = ds.rename_columns({'text': 'review', 'label': 'sentiment'})
@@ -51,8 +53,8 @@ df['review'] = df['review'].apply(lambda x: x[:1000])
 sentiment_model = AutoModelForSequenceClassification.from_pretrained(config["cls_model_name"])
 sentiment_tokenizer = AutoTokenizer.from_pretrained(config["cls_model_name"])
 
-gpt2_model = GPT2HeadWithValueModel.from_pretrained(config['lm_name'], torch_dtype=torch.bfloat16)
-gpt2_model_ref = GPT2HeadWithValueModel.from_pretrained(config['ref_lm_name'], torch_dtype=torch.bfloat16)
+gpt2_model = ValueModel(config)
+gpt2_model_ref = ValueModel(config)
 gpt2_tokenizer = AutoTokenizer.from_pretrained(config['tk_name'])
 
 # wandb.watch(gpt2_model, log='all')
